@@ -21,12 +21,6 @@ function is_object(val) {
   return Object.prototype.toString.call(val) === '[object Object]';
 }
 
-// ------------------------------------------------------------------
-// $('.term').on('keyup', function (e) {
-//   setTimeout(() => {
-//     $('.term-wrapper').scrollTop($('.term-wrapper').height() + 50);
-//   }, 100);
-// });
 var login;
 
 var term = $('.term').terminal(
@@ -53,13 +47,6 @@ var term = $('.term').terminal(
           },
           name: 'lead',
         },
-        // {
-        //   type: boolean,
-        //   message: '\nAre you a leading a project?',
-        //   prompt: '(y)es (n)o: ',
-        //   items: [/y|yes/i, /n|no/i],
-        //   name: 'lead',
-        // },
         {
           type: input,
           message: '\nProject name (optional):',
@@ -118,7 +105,7 @@ var term = $('.term').terminal(
     },
     help: function (...args) {
       this.echo(
-        'Available commands: \n<bold>help</bold> \n<bold>info</bold> \n<bold>apply</bold> \n<bold>when</bold> \n<bold>where</bold>'
+        'Available commands: \n<bold>help</bold> \n<bold>apply</bold> \n<bold>when</bold> \n<bold>where</bold>'
       );
     },
     login: function (...args) {
@@ -132,15 +119,16 @@ var term = $('.term').terminal(
         );
       } else {
         login = args.join(' ');
-        this.typing(
-          'echo',
-          10,
-          `Welcome, ${login}! \nWe at OfficeRnD in cooperation with Vault-Tec corp. invite you to a top secret research facility for an epic challenge! Armed with a Vault Dweller Survival Guide, endless supply of Nuka-Cola, an access token to our mainframe, and your very own Pip-Boy, you'll team up with fellow Dwellers to innovate and create a state-of-the-art AI assistant designed to make life in the Vault more efficient and enjoyable. You have three days to harness your skills, creativity, and teamwork to build an AI that will revolutionize Vault life. Are you ready to <bold>apply</bold> or you need some <bold>help</bold> first?`
-        );
+        this.echo('Enter password');
+        this.typing('echo', 150, '> **********').then(() =>
+        {
+          this.typing(
+            'echo',
+            10,
+            `Welcome, ${login}! \nWe at OfficeRnD in cooperation with Vault-Tec corp. invite you to a top secret research facility for an epic challenge! Armed with a Vault Dweller Survival Guide, endless supply of Nuka-Cola, an access token to our mainframe, and your very own Pip-Boy, you'll team up with fellow Dwellers to innovate and create a state-of-the-art AI assistant designed to make life in the Vault more efficient and enjoyable. You have three days to harness your skills, creativity, and teamwork to build an AI that will revolutionize Vault life. Are you ready to <bold>apply</bold> or you need some <bold>help</bold> first?`
+          );
+        })
       }
-    },
-    info: function (...args) {
-      this.typing('echo', 10, 'TODO: add more details about the event');
     },
     when: function (...args) {
       this.typing('echo', 10, 'Opening 8 oct 2024');
