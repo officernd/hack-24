@@ -57,6 +57,7 @@ html {
 
 .term-wrapper {
   overflow: scroll;
+  scrollbar-width: none;
   display: block;
   width: 705px;
   height: 500px;
