@@ -1,0 +1,64 @@
+.terminal-output > :not(.raw) .terminal-form-control {
+  overflow: hidden;
+  display: inline;
+}
+.terminal-output > :not(.raw) .terminal-form-control,
+.terminal-output > :not(.raw) .terminal-form-control span {
+  font-size: calc(var(--size, 1) * 1.5 * 14px);
+}
+.terminal-form-control {
+  text-align: center;
+}
+/* FIX BUG IN UNICODE CHARACTERS FOR RADIO ON WINDOWS */
+.terminal-output > :not(.raw) .terminal-form-control.terminal-big-radio span {
+  font-size: calc(var(--size, 1) * 1.1 * 14px);
+}
+.terminal-output
+  > :not(.raw)
+  .terminal-form-control.terminal-radio:not(.terminal-big-radio) {
+  padding-top: 3px;
+}
+.terminal-output
+  > :not(.raw)
+  .terminal-form-control.terminal-radio:not(.terminal-big-radio)
+  span {
+  position: relative;
+  top: 3px;
+}
+.terminal {
+  background-color: rgba(0, 0, 0, 0) !important;
+  --color: greenyellow;
+}
+
+body,
+html {
+  background-color: black;
+  margin: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-element {
+  width: 1200px;
+  height: 800px;
+  background-image: url(web_terminal.jpg);
+  background-repeat: no-repeat;
+
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.term-wrapper {
+  overflow: scroll;
+  display: block;
+  width: 705px;
+  height: 500px;
+  margin-bottom: 100px;
+}
