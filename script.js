@@ -118,7 +118,7 @@ var term = $('.term').terminal(
         )
           .then(() => this.typing('echo', 200, 'Redirecting......'))
           .then(() => window.open(url, '_blank'))
-          .then(() => this.echo(`<bold>If you're not yet redirected, please or follow</bold> [[!;;;;${url}]this link]`));
+          .then(() => this.echo(`<bold>If you're not yet redirected, please follow</bold> [[!;;;;${url}]this link]`));
       });
     },
     help: function (...args) {
@@ -171,7 +171,7 @@ var term = $('.term').terminal(
     renderHandler: function (val) {
       //workaround for scroll issue with forms
       setTimeout(() => {
-        $('.term-wrapper').scrollTop($('.term-wrapper').height() + 50);
+        $('.term-wrapper').scrollTop(99999);
       }, 100);
       if (is_object(val) || Array.isArray(val)) {
         return JSON.stringify(val, true, 4);
