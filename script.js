@@ -134,7 +134,12 @@ var term = $('.term').terminal(
       } else {
         login = args.join(' ');
         this.echo('Enter password');
-        this.typing('echo', 150, '> **********').then(() => this.typing('echo',10, MSG_WELCOME(login)));
+        this.typing('echo', 150, '> ********** \n>mail').then(() => {
+          this.echo('\n====================================================================================');
+          this.typing('echo',10, MSG_WELCOME(login)).then(() => {
+            this.echo('====================================================================================');
+          });
+        });
       }
     },
     when: function (...args) {
