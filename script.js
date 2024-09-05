@@ -116,9 +116,9 @@ var term = $('.term').terminal(
           20,
           `Thank you, ${form.name}! \nYou will need to confirm this form before our council contacts you.`
         )
-          .then(() => this.typing('echo', 250, 'Redirecting......'))
+          .then(() => this.typing('echo', 200, 'Redirecting......'))
           .then(() => window.open(url, '_blank'))
-          .then(() => this.echo(`or follow [[!;;;;${url}]this link]`));
+          .then(() => this.echo(`<bold>If you're not yet redirected, please or follow</bold> [[!;;;;${url}]this link]`));
       });
     },
     help: function (...args) {
