@@ -21,6 +21,24 @@ function is_object(val) {
   return Object.prototype.toString.call(val) === '[object Object]';
 }
 
+const MSG_WELCOME = (name) => `Welcome, ${name}! \nWe at OfficeRnD in cooperation with Vault-Tec corp. invite you to a top secret research facility for an epic challenge! Armed with a Vault Dweller Survival Guide, endless supply of Nuka-Cola, an access token to our mainframe, and your very own Pip-Boy, you'll team up with fellow Dwellers to innovate and create a state-of-the-art AI assistant designed to make life in the Vault more efficient and enjoyable. You have three days to harness your skills, creativity, and teamwork to build an AI that will revolutionize Vault life. Are you ready to <bold>apply</bold> or you need some <bold>help</bold> first?`
+
+const MSG_WHERE = `<bold>Locations</bold>
+====================================================================================
+BG Vault dwellers: <bold>SYNERGY TOWER</bold> | 42.67024292540808, 23.37190250574886
+US Vault dwellers: <bold>ONLINE</bold>        | 127.0.0.1
+UK Vault dwellers: <bold>ONLINE</bold>        | 127.0.0.1
+AU Vault dwellers: <bold>ONLINE</bold>        | 127.0.0.1
+====================================================================================`;
+
+const MSG_WHEN = `<bold>Opening</bold>
+==========================================
+US/CDT  | <bold>TUE, 8 OCT 2024, 0800</bold>
+US/EDT  | <bold>TUE, 8 OCT 2024, 0900</bold>
+UK/BST  | <bold>TUE, 8 OCT 2024, 1400</bold>
+BG/EEST | <bold>TUE, 8 OCT 2024, 1600</bold>
+AU/AEDT | <bold>WED, 9 OCT 2024, 1000</bold>
+==========================================`;
 var login;
 
 var term = $('.term').terminal(
@@ -104,9 +122,7 @@ var term = $('.term').terminal(
       });
     },
     help: function (...args) {
-      this.echo(
-        'Available commands: \n<bold>help</bold> \n<bold>apply</bold> \n<bold>when</bold> \n<bold>where</bold>'
-      );
+      this.echo('Available commands: \n<bold>help</bold> \n<bold>apply</bold> \n<bold>when</bold> \n<bold>where</bold>');
     },
     login: function (...args) {
       if (login) {
@@ -114,31 +130,20 @@ var term = $('.term').terminal(
         return;
       }
       if (args.length < 1) {
-        this.echo(
-          `login expects 1 argument, got ${args.length}; try "login your name"`
-        );
+        this.echo(`login expects 1 argument, got ${args.length}; try "login your name"`);
       } else {
         login = args.join(' ');
         this.echo('Enter password');
-        this.typing('echo', 150, '> **********').then(() =>
-        {
-          this.typing(
-            'echo',
-            10,
-            `Welcome, ${login}! \nWe at OfficeRnD in cooperation with Vault-Tec corp. invite you to a top secret research facility for an epic challenge! Armed with a Vault Dweller Survival Guide, endless supply of Nuka-Cola, an access token to our mainframe, and your very own Pip-Boy, you'll team up with fellow Dwellers to innovate and create a state-of-the-art AI assistant designed to make life in the Vault more efficient and enjoyable. You have three days to harness your skills, creativity, and teamwork to build an AI that will revolutionize Vault life. Are you ready to <bold>apply</bold> or you need some <bold>help</bold> first?`
-          );
-        })
+        this.typing('echo', 150, '> **********').then(() => this.typing('echo',10, MSG_WELCOME(login)));
       }
     },
     when: function (...args) {
-      this.typing('echo', 10, 'Opening 8 oct 2024');
-      this.typing('echo', 10, 'Start 9 oct 2024');
+      this.typing('echo', 10, MSG_WHEN);
     },
     where: function (...args) {
       this.typing(
         'echo',
-        10,
-        'Sofia Vault dwellers: Work & Share Synergy, Sofia Tech Park \nUS, UK and AUS Vault dwellers: ONLINE'
+        10, MSG_WHERE
       );
     },
   },
@@ -152,14 +157,14 @@ var term = $('.term').terminal(
           this.typing('echo', 10, '==========================================')
         )
         .then(() =>
-          this.echo('Connection established. \nPlease <bold>login</bold>.')
+          this.echo('Connection established. \nPlease <bold>login</bold> first.')
         );
     },
     onCommandNotFound: function (cmd) {
-      console.log(cmd);
       this.error(`Command ${cmd} not found! Try help instead.`);
     },
     renderHandler: function (val) {
+      //workaround for scroll issue with forms
       setTimeout(() => {
         $('.term-wrapper').scrollTop($('.term-wrapper').height() + 50);
       }, 100);
@@ -167,9 +172,6 @@ var term = $('.term').terminal(
         return JSON.stringify(val, true, 4);
       }
       return val;
-    },
-    onResize: function () {
-      console.log(this.geometry());
     },
     checkArity: false,
   }
