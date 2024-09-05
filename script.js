@@ -122,7 +122,7 @@ var term = $('.term').terminal(
       });
     },
     help: function (...args) {
-      this.echo('Available commands: \n<bold>help</bold> \n<bold>apply</bold> \n<bold>when</bold> \n<bold>where</bold>');
+      this.echo('Available commands: \n<bold>help</bold> \n<bold>apply</bold> \n<bold>when</bold> \n<bold>where</bold> \n<bold>login</bold>');
     },
     login: function (...args) {
       if (login) {
