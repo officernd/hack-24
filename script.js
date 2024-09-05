@@ -130,7 +130,7 @@ var term = $('.term').terminal(
         return;
       }
       if (args.length < 1) {
-        this.echo(`login expects 1 argument, got ${args.length}; try "login your name"`);
+        this.echo(`login expects 1 argument, got ${args.length}; try <bold>login your name</bold>`);
       } else {
         login = args.join(' ');
         this.echo('Enter password');
@@ -166,7 +166,7 @@ var term = $('.term').terminal(
         );
     },
     onCommandNotFound: function (cmd) {
-      this.error(`Command ${cmd} not found! Try help instead.`);
+      this.error(`Command ${cmd} not found! Try 'help' instead.`);
     },
     renderHandler: function (val) {
       //workaround for scroll issue with forms
